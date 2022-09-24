@@ -1,0 +1,5 @@
+boto3==1.24.3
+chalice==1.27.0
+tweepy==3.10.0
+requests==2.28.0
+newsapi-python==0.2.6
