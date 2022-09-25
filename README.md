@@ -1,4 +1,4 @@
-# HoloNews-NoticeBot
+# HoloTrend-NoticeBot
 
 
 [AWS Chalice](https://github.com/aws/chalice)
