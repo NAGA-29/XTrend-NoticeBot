@@ -1,6 +1,5 @@
 # HoloTrend-NoticeBot
 
-
 [AWS Chalice](https://github.com/aws/chalice)
 [AWS Chalice Document](https://aws.github.io/chalice/index.html)
 
