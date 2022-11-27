@@ -7,6 +7,7 @@ import tweepy
 '''origin'''
 from chalicelib import Hololive
 from chalicelib import TwitterWrapper
+from chalicelib import KeepWatch
 import trend_watcher
 
 ### initialize
@@ -23,17 +24,18 @@ app = Chalice(app_name='HoloTrend-NoticeBot')
 # @app.schedule('cron(10 22/7 * * ? *)')
 # @app.schedule('cron(0 22 * * ? *)')
 def Main(event):
-    # 日本時間 - 7日前
-    base_toDay = datetime.date.today() - datetime.timedelta(days=1) 
-    base_fromDay = base_toDay - datetime.timedelta(days=7)
-    toDay =  base_toDay.strftime('%Y-%m-%d')
-    fromDay =  base_fromDay.strftime('%Y-%m-%d')
+    # # 日本時間 - 7日前
+    # base_toDay = datetime.date.today() - datetime.timedelta(days=1) 
+    # base_fromDay = base_toDay - datetime.timedelta(days=7)
+    # toDay =  base_toDay.strftime('%Y-%m-%d')
+    # fromDay =  base_fromDay.strftime('%Y-%m-%d')
     
-    tw = TwitterWrapper(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
+    # tw = TwitterWrapper(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
 
-    news = news.NewsAPIResearch_Every(fromDay, toDay)
-    for key, val in news.items():
-        title = val[0]
-        short_URL = bit.get_shortenURL(key)
-    message = f'Hololive News!!💖\n\n{title}\n{short_URL}\n#hololive'
-    tw.tweet(message)
+    # news = news.NewsAPIResearch_Every(fromDay, toDay)
+    # for key, val in news.items():
+    #     title = val[0]
+    #     short_URL = bit.get_shortenURL(key)
+    # message = f'Hololive News!!💖\n\n{title}\n{short_URL}\n#hololive'
+    # tw.tweet(message)
+    

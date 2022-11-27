@@ -13,8 +13,7 @@ from chalicelib.util.pkl_by_bot3 import *
 
 # Model
 from chalicelib.model.setting import session
-from chalicelib.model.HololiveProfile import *
-from chalicelib.model.NoriproProfile import *
+from chalicelib.model.KeepWatch import *
 
 # Util
 from chalicelib.util.pkl_by_bot3 import PKL_BY_BOT3
