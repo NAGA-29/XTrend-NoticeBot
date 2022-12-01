@@ -9,30 +9,37 @@ import re
 import sys
 import tweepy
 
-from chalicelib.service.twitter.TwitterWrapper import TwitterWrapper
+from chalicelib import TwitterWrapper
 
 '''
 original
 '''
 from chalicelib import app
-sys.path.append(os.path.join(os.path.dirname(__file__), '../../../'))
-from model import KeepWatch, NowLiveKeepWatch
-from model.setting import session
+# sys.path.append(os.path.join(os.path.dirname(__file__), '../../../'))
+from chalicelib import session
+from chalicelib import KeepWatch
+from chalicelib import NowLiveKeepWatch
 
+TWITTER_SCREEN_NAME = os.environ.get('TWITTER_SCREEN_NAME')
+WOEID_DICT = os.environ.get('WOEID_DICT')
+DEFAULT_CHECK_LIST = os.environ.get('DEFAULT_CHECK_LIST')
+CHECK_LIST = os.environ.get('CHECK_LIST')
+NOTIFICATION_SEC = os.environ.get('NOTIFICATION_SEC')
 class TrendWatcher:
     def __init__(self, twitter_api:TwitterWrapper, lineAPI=None, logger=None, trend_save_file:str=None):
         self.TWITTER_API        = twitter_api
-        self.SCREEN_NAME        = app.TWITTER_SCREEN_NAME # @usernameの自分のusername
-        self.WOEID_DICT         = app.WOEID_DICT
-        self.DEFAULT_CHECK_LIST = app.DEFAULT_CHECK_LIST
-        self.CHECK_LIST         = app.CHECK_LIST
-        self._NOTIFICATION_SEC = 3600   # 通知基準 60分
+        self.SCREEN_NAME        = TWITTER_SCREEN_NAME # @usernameの自分のusername
+        self.WOEID_DICT         = WOEID_DICT
+        self.DEFAULT_CHECK_LIST = DEFAULT_CHECK_LIST
+        self.CHECK_LIST         = CHECK_LIST
+        self._NOTIFICATION_SEC  = NOTIFICATION_SEC   # 通知基準 60分
         self.TREND_SAVE_FILE    = '/Users/nagaki/Documents/naga-sample-code/python/MyHololiveProject_stg/My_Hololive_Project/config/trend_log_JP.pkl'
+        
         if trend_save_file != None:
             self.TREND_SAVE_FILE = trend_save_file
         self.logger = logger
 
-    def hashtag_extract(self, text:str):
+    def hashtag_extract(self, table:str, text:str):
         """テキスト(タイトル)からハッシュタグを抽出する
 
         Args:
@@ -46,6 +53,7 @@ class TrendWatcher:
         # keep_watch_db = session.query(KeepWatch).all()
         now_live_keep_watch_db = session.query(NowLiveKeepWatch).filter(NowLiveKeepWatch.belongs == 'hololive').all()
         for data in now_live_keep_watch_db:
+            # tags = re.findall(r"([#＃][^#\s]*?)[\/\／\【\】\(\)\[\]　 \「\」]", data.title)
             tags = re.findall(r"([#＃][^#\s]*?)[\/\／\【\】\(\)\[\]　 \「\」]", data.title)
             for tag in tags:
                 hashtags.append(re.sub('＃', '#', tag))
@@ -54,7 +62,7 @@ class TrendWatcher:
     def check_notice_time(self, last_notice_time:str, sec:int):
         return (datetime.now() - last_notice_time).seconds >= sec
 
-    def main(self, default=False):
+    def main(self, tables=[], default=False):
         """
 
         Args:

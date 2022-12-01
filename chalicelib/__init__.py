@@ -5,7 +5,6 @@ from chalicelib.config import app
 
 # API
 from chalicelib.service.twitter.TwitterWrapper import *
-from chalicelib.service.youtube.YoutubeWrapper import *
 
 # Utility
 from chalicelib.util import *
@@ -13,7 +12,9 @@ from chalicelib.util.pkl_by_bot3 import *
 
 # Model
 from chalicelib.model.setting import session
+from chalicelib.model.setting import Base
 from chalicelib.model.KeepWatch import *
+from chalicelib.model.NowLiveKeepWatch import *
 
 # Util
 from chalicelib.util.pkl_by_bot3 import PKL_BY_BOT3

@@ -2,18 +2,18 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, BIGINT, Integer, String, TEXT, Float, DateTime
 
 import sys
+# sys.path.append('../')
 # from setting import Base
 from .setting import Base
-# sys.path.append('../')
 # from config import Base
 # from config import ENGINE
 
-class KeepWatch(Base):
+class NowLiveKeepWatch(Base):
     """
-    KeepWatchモデル
+    YoutubeVideoモデル
     """
-    # __tablename__ = 'keep_watchs'
-    __tablename__ = 'keep_watchs'
+    __tablename__ = 'now_live_keep_watchs'
+
     id = Column('id', BIGINT, primary_key = True)
     video_id = Column('video_id', String(255))
     holo_name = Column('holo_name', String(255))
@@ -28,8 +28,9 @@ class KeepWatch(Base):
     active_live_chat_id = Column('active_live_chat_id', String(255))
     image_L = Column('image_L', TEXT)
     image_default = Column('image_default', TEXT)
+    notification_last_time_at = Column('notification_last_time_at', DateTime)
+    compared_point = Column('compared_point', Integer)
     status = Column('status', DateTime)
-
 
 # def main(args):
 #     """
