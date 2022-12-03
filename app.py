@@ -41,23 +41,23 @@ def Main(event):
     
     pkl_by_bot3 = PKL_BY_BOT3(BUCKET_NAME)
     trend_file = pkl_by_bot3.read_pkl(TREND_SAVE_FILE)
+    print(trend_file)
+    # trend = TrendWatcher(twitter_api=tw)
+    # trend.main(trend=trend_file)
     
-    trend = TrendWatcher(twitter_api=tw)
-    trend.main(trend=trend_file)
-    
-    # try:
-    #     conn = pymysql.connect(host=ENDPOINT, user=USER, passwd=PASS,
-    #                             db=DBNAME, charset='utf8mb4', port=int(PORT),
-    #                             connect_timeout=5)
-    # except pymysql.MySQLError as e:
-    #     print("ERROR: Unexpected error: Could not connect to MySQL instance.")
-    #     pprint(e)
-    #     sys.exit()
+    try:
+        conn = pymysql.connect(host=ENDPOINT, user=USER, passwd=PASS,
+                                db=DBNAME, charset='utf8mb4', port=int(PORT),
+                                connect_timeout=5)
+    except pymysql.MySQLError as e:
+        print("ERROR: Unexpected error: Could not connect to MySQL instance.")
+        pprint(e)
+        sys.exit()
 
-    # print("SUCCESS: Connection to RDS MySQL instance succeeded")
-    # with conn.cursor() as cursors:
-    #     cursors.execute('show databases')
-    #     pprint(cursors.fetchall())
-    # conn.close()
-    # conn = None
+    print("SUCCESS: Connection to RDS MySQL instance succeeded")
+    with conn.cursor() as cursors:
+        cursors.execute('show databases')
+        pprint(cursors.fetchall())
+    conn.close()
+    conn = None
     print('END!')
