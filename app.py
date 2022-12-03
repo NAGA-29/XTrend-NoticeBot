@@ -1,83 +1,63 @@
 from chalice import Chalice, Cron, Rate
+import boto3
+
 import datetime
 import os
 from pprint import pprint
-import tweepy
-import boto3
 import sys
-'''origin'''
-from chalicelib import Hololive
-from chalicelib import TwitterWrapper
-import trend_watcher
+import tweepy
 
-from pprint import pprint 
+'''origin'''
+from chalicelib import app
+from chalicelib import TwitterWrapper
+from chalicelib import Hololive
+from chalicelib import TrendWatcher
+from chalicelib import PKL_BY_BOT3
 
 import pymysql
 
-### initialize
-# # 本番アカウント
-# # ###############################################################################
-CONSUMER_KEY = os.environ.get('CONSUMER_KEY')
-CONSUMER_SECRET = os.environ.get('CONSUMER_SECRET')
-ACCESS_TOKEN = os.environ.get('ACCESS_TOKEN')
-ACCESS_TOKEN_SECRET = os.environ.get('ACCESS_TOKEN_SECRET')
+# 本番アカウント
+CONSUMER_KEY = app.CONSUMER_KEY
+CONSUMER_SECRET = app.CONSUMER_SECRET
+ACCESS_TOKEN = app.ACCESS_TOKEN
+ACCESS_TOKEN_SECRET = app.ACCESS_TOKEN_SECRET
+
+ENDPOINT = app.RDS_HOST
+PORT = app.RDS_PORT
+USER = app.RDS_USER
+PASS = app.RDS_PASS
+REGION = app.REGION
+DBNAME = app.RDS_DB
+
+BUCKET_NAME = app.BUCKET_NAME
+TREND_SAVE_FILE = app.TREND_SAVE_FILE
 
 app = Chalice(app_name='HoloTrend-NoticeBot')
 
-# host = os.environ['RDS_HOST']
-# user = os.environ['RDS_USER']
-# password = os.environ['RDS_PASS']
-# db = os.environ['RDS_DB']
-
-# connection = pymysql.connect(host=host, user=user, password=password, database=db, charset='utf8mb4', port=3306,)
-
-ENDPOINT = os.environ['RDS_HOST']
-PORT = "3306"
-USER = os.environ['RDS_USER']
-PASS = os.environ['RDS_PASS']
-REGION = "ap-northeast-1"
-DBNAME = os.environ['RDS_DB']
-
-@app.schedule(Rate(10, unit=Rate.MINUTES))
+@app.schedule(Rate(15, unit=Rate.MINUTES))
 def Main(event):
-    tw = TwitterWrapper(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
-
-    # news = news.NewsAPIResearch_Every(fromDay, toDay)
-    # for key, val in news.items():
-    #     title = val[0]
-    #     short_URL = bit.get_shortenURL(key)
-    # message = f'Hololive News!!💖\n\n{title}\n{short_URL}\n#hololive'
-    # tw.tweet(message)
-    # trend_watcher()
-    try:
-        conn = pymysql.connect(host=ENDPOINT, user=USER, passwd=PASS, db=DBNAME, charset='utf8mb4', port=3306, connect_timeout=5)
-    except pymysql.MySQLError as e:
-        print("ERROR: Unexpected error: Could not connect to MySQL instance.")
-        pprint(e)
-        sys.exit()
-
-    print("SUCCESS: Connection to RDS MySQL instance succeeded")
+    tw = TwitterWrapper(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN,
+                        ACCESS_TOKEN_SECRET)
     
+    pkl_by_bot3 = PKL_BY_BOT3(BUCKET_NAME)
+    trend_file = pkl_by_bot3.read_pkl(TREND_SAVE_FILE)
     
-    with conn.cursor() as cursors:
-        cursors.execute('show databases')
-        
-        pprint(cursors.fetchall())
-    conn.close()
-    conn = None
+    trend = TrendWatcher(twitter_api=tw)
+    trend.main(trend=trend_file)
+    
+    # try:
+    #     conn = pymysql.connect(host=ENDPOINT, user=USER, passwd=PASS,
+    #                             db=DBNAME, charset='utf8mb4', port=int(PORT),
+    #                             connect_timeout=5)
+    # except pymysql.MySQLError as e:
+    #     print("ERROR: Unexpected error: Could not connect to MySQL instance.")
+    #     pprint(e)
+    #     sys.exit()
 
-    # item_count = 0
-    # with conn.cursor() as cur:
-    #     cur.execute("create table Employee ( EmpID  int NOT NULL, Name varchar(255) NOT NULL, PRIMARY KEY (EmpID))")
-    #     cur.execute('insert into Employee (EmpID, Name) values(1, "Joe")')
-    #     cur.execute('insert into Employee (EmpID, Name) values(2, "Bob")')
-    #     cur.execute('insert into Employee (EmpID, Name) values(3, "Mary")')
-    #     conn.commit()
-    #     cur.execute("select * from Employee")
-    #     for row in cur:
-    #         item_count += 1
-    #         # logger.info(row)
-    #         print(row)
-    # conn.commit()
-
-    # return "Added %d items from RDS MySQL table" %(item_count)
+    # print("SUCCESS: Connection to RDS MySQL instance succeeded")
+    # with conn.cursor() as cursors:
+    #     cursors.execute('show databases')
+    #     pprint(cursors.fetchall())
+    # conn.close()
+    # conn = None
+    print('END!')

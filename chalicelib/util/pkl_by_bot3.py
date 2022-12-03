@@ -3,6 +3,8 @@ s3のpklファイルを扱うためのクラス
 '''
 import boto3
 import pickle
+
+
 class PKL_BY_BOT3:
     def __init__(self, bucket_name):
         self.BUCKET_NAME = bucket_name
@@ -14,14 +16,27 @@ class PKL_BY_BOT3:
         return s3_object
 
     def read_pkl(self, object_key_name: str):
+        """pklを読み込む
+
+        Args:
+            object_key_name (str): バケット内のpklファイルの名前
+
+        Returns:
+            pklファイルの中身
+        """
         s3_object = self.__get_s3object(object_key_name).get()
         return pickle.loads(s3_object['Body'].read())
 
     def write_pkl(self, data, object_key_name: str):
+        """pklファイルに書き込む
+
+        Args:
+            data (_type_): pklファイルに書き込むデータ
+            object_key_name (str): _description_
+        """
         pickle_byte_obj = pickle.dumps(data)
         s3_object = self.__get_s3object(object_key_name)
         s3_object.put(Body=pickle_byte_obj)
-        
 
     def noticed_space_id_check(self, space_id, object_key_name):
         noticed_space_id_list = None

@@ -8,13 +8,14 @@ from .setting import Base
 # from config import Base
 # from config import ENGINE
 
+
 class NowLiveKeepWatch(Base):
     """
     YoutubeVideoモデル
     """
     __tablename__ = 'now_live_keep_watchs'
 
-    id = Column('id', BIGINT, primary_key = True)
+    id = Column('id', BIGINT, primary_key=True)
     video_id = Column('video_id', String(255))
     holo_name = Column('holo_name', String(255))
     belongs = Column('belongs', String(255))

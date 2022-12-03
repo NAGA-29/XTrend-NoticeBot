@@ -8,13 +8,14 @@ from .setting import Base
 # from config import Base
 # from config import ENGINE
 
+
 class KeepWatch(Base):
     """
     KeepWatchモデル
     """
     # __tablename__ = 'keep_watchs'
     __tablename__ = 'keep_watchs'
-    id = Column('id', BIGINT, primary_key = True)
+    id = Column('id', BIGINT, primary_key=True)
     video_id = Column('video_id', String(255))
     holo_name = Column('holo_name', String(255))
     belongs = Column('belongs', String(255))

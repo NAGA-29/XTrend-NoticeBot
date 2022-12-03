@@ -1,9 +1,10 @@
-'''
+"""
 s3のpklファイルを扱うためのクラス
-'''
+"""
 import base64
 import boto3
 import pickle
+
 
 class IMG_FROM_S3:
     def __init__(self, bucket_name):
@@ -21,9 +22,9 @@ class IMG_FROM_S3:
             
         """
         s3 = boto3.resource('s3')
-        return  s3.Bucket(self.BUCKET_NAME)
+        return s3.Bucket(self.BUCKET_NAME)
 
-    def get_img_from_s3(self, filename:str, file_path:str):
+    def get_img_from_s3(self, filename: str, file_path: str):
         """s3から画像を取得する
 
         Args:
@@ -31,11 +32,6 @@ class IMG_FROM_S3:
             file_path (str): 保存先のパス
         """
         bucket = self.__get_bucket()
-        # s3_object = self.__get_s3object(object_key_name).get()
-        # with open('FILE_NAME', 'wb') as f:
-        #     s3_object.download_fileobj('BUCKET_NAME', 'OBJECT_NAME', f)
-        # body = s3_object['Body'].read()
-        # return base64.b64encode(body)
         bucket.download_file(filename, file_path)
 
     def read_pkl(self, object_key_name: str):

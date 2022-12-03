@@ -10,79 +10,79 @@ class Hololive:
     def get_twitter_ids():
         ch_list = {
             # 運営
-            'Hololive' : 'hololivetv',
+            'Hololive': 'hololivetv',
             # 'HololiveEN' : 'UCotXwY6s8pWmuWd_snKYjhg',   #hololive EN
             # 'HololiveID' : 'UCfrWoRGlawPQDQxxeIDRP0Q',   #hololive ID
             # 'Cover' : 'cover_corp',
-            'えーちゃん' : 'achan_UGA',
+            'えーちゃん': 'achan_UGA',
             # ホロライブ
-            '桐生ココ' : 'kiryucoco',        #桐生ココ
-            '星街すいせい' : 'suisei_hosimati',    #星街すいせい
-            'ロボ子さん' : 'robocosan',     #'ロボ子さん'
-            'アキ・ローゼンタール' : 'akirosenthal',    #'アキ・ローゼンタール'
-            '大神ミオ' : 'ookamimio',     #'大神ミオ'
-            '赤井はあと' : 'akaihaato',     #'赤井はあと'
-            '不知火フレア' : 'shiranuiflare',     #'不知火フレア'
-            '夏色まつり' : 'natsuiromatsuri',   #'夏色まつり'
-            '宝鐘マリン' : 'houshoumarine',      #'宝鐘マリン' 
-            '姫森ルーナ' : 'himemoriluna',       #'姫森ルーナ' 
-            '白上フブキ' : 'shirakamifubuki',        #'白上フブキ' 
-            '大空スバル' : 'oozorasubaru',      #'大空スバル'
-            '百鬼あやめ' : 'nakiriayame',       #'百鬼あやめ'
-            '猫又おかゆ' : 'nekomataokayu',      #'猫又おかゆ' 
-            # '潤羽るしあ' : 'uruharushia',       #'潤羽るしあ'
-            '戌神ころね' : 'inugamikorone',     #'戌神ころね'
-            '角巻わため' : 'tsunomakiwatame',        #'角巻わため' 
-            '白銀ノエル' : 'shiroganenoel',     #'白銀ノエル'
-            '兎田ぺこら' : 'usadapekora',       #'兎田ぺこら'
-            'さくらみこ' : 'sakuramiko35',      #'さくらみこ'
-            '紫咲シオン' : 'murasakishionch',       #'紫咲シオン'
-            '湊あくあ' : 'minatoaqua',        #'湊あくあ'
-            '常闇トワ' : 'tokoyamitowa',      #'常闇トワ'
-            '夜空メル'  : 'yozoramel',      #'夜空メル' 
-            '天音かなた' : 'amanekanatach',     #天音かなた
-            '癒月ちょこ' : 'yuzukichococh',     #癒月ちょこ
-            '癒月ちょこ(サブ)' : 'yuzukichococh',     #癒月ちょこ
-            'ときのそら' : 'tokino_sora',       #'ときのそら'
+            '桐生ココ': 'kiryucoco',         # 桐生ココ
+            '星街すいせい': 'suisei_hosimati',     # 星街すいせい
+            'ロボ子さん': 'robocosan',      # 'ロボ子さん'
+            'アキ・ローゼンタール': 'akirosenthal',     # 'アキ・ローゼンタール'
+            '大神ミオ': 'ookamimio',      # '大神ミオ'
+            '赤井はあと': 'akaihaato',      # '赤井はあと'
+            '不知火フレア': 'shiranuiflare',      # '不知火フレア'
+            '夏色まつり': 'natsuiromatsuri',    # '夏色まつり'
+            '宝鐘マリン': 'houshoumarine',       # '宝鐘マリン'
+            '姫森ルーナ': 'himemoriluna',        # '姫森ルーナ'
+            '白上フブキ': 'shirakamifubuki',         # '白上フブキ'
+            '大空スバル': 'oozorasubaru',       # '大空スバル'
+            '百鬼あやめ': 'nakiriayame',        # '百鬼あやめ'
+            '猫又おかゆ': 'nekomataokayu',       # '猫又おかゆ'
+            # '潤羽るしあ': 'uruharushia',        # '潤羽るしあ'
+            '戌神ころね': 'inugamikorone',      # '戌神ころね'
+            '角巻わため': 'tsunomakiwatame',         # '角巻わため'
+            '白銀ノエル': 'shiroganenoel',      # '白銀ノエル'
+            '兎田ぺこら': 'usadapekora',        # '兎田ぺこら'
+            'さくらみこ': 'sakuramiko35',       # 'さくらみこ'
+            '紫咲シオン': 'murasakishionch',        # '紫咲シオン'
+            '湊あくあ': 'minatoaqua',         # '湊あくあ'
+            '常闇トワ': 'tokoyamitowa',       # '常闇トワ'
+            '夜空メル': 'yozoramel',       # '夜空メル'
+            '天音かなた': 'amanekanatach',      # 天音かなた
+            '癒月ちょこ': 'yuzukichococh',      # 癒月ちょこ
+            '癒月ちょこ(サブ)': 'yuzukichococh',      # 癒月ちょこ
+            'ときのそら': 'tokino_sora',        # 'ときのそら'
             # 5期生
-            '雪花ラミィ' : 'yukihanalamy',     #雪花ラミィ
-            '桃鈴ねね' : 'momosuzunene',     #桃鈴ねね
-            '獅白ぼたん' : 'shishirobotan',        #獅白ぼたん
-            # '魔乃アロエ' : 'manoaloe',     #魔乃アロエ
-            '尾丸ポルカ' : 'omarupolka',      #尾丸ポルカ
-            # holoX 6期生
-            'ラプラス・ダークネス' : 'LaplusDarknesss',
-            '鷹嶺ルイ' : 'takanelui',
-            '博衣こより' : 'hakuikoyori',
-            '沙花叉クロヱ' : 'sakamatachloe',
-            '風真いろは' : 'kazamairohach',
+            '雪花ラミィ': 'yukihanalamy',      # 雪花ラミィ
+            '桃鈴ねね': 'momosuzunene',      # 桃鈴ねね
+            '獅白ぼたん': 'shishirobotan',         # 獅白ぼたん
+            #  '魔乃アロエ': 'manoaloe',      # 魔乃アロエ
+            '尾丸ポルカ': 'omarupolka',       # 尾丸ポルカ
+            #  holoX 6期生
+            'ラプラス・ダークネス': 'LaplusDarknesss',
+            '鷹嶺ルイ': 'takanelui',
+            '博衣こより': 'hakuikoyori',
+            '沙花叉クロヱ': 'sakamatachloe',
+            '風真いろは': 'kazamairohach',
 
             # イノナカミュージック
-            'AZKi' : 'AZKi_VDiVA',     #'AZKI' 
+            'AZKi': 'AZKi_VDiVA',      # 'AZKI'
 
-            #ホロライブ　EN
-            '森カリオペ' : 'moricalliope',    #森カリオペ モリ・カリオペ
-            '小鳥遊キアラ' : 'takanashikiara',    #小鳥遊キアラ
-            '一伊那尓栖' : 'ninomaeinanis',    #一伊那尓栖 にのまえいなにす
-            'がうる・ぐら' : 'gawrgura',    #がうる・くら
-            'ワトソン・アメリア' : 'watsonameliaEN',  #ワトソン・アメリア
-            'IRyS' : 'irys_en', #IRyS アイリス
-            'つくもさな' : 'tsukumosana',      # 九十九佐命/つくもさな
-            'セレス・ファウナ' : 'ceresfauna',    # セレス・ファウナ
-            'オーロ・クロニー' : 'ourokronii',   # オーロ・クロニー
-            'ななしむめい' : 'nanashimumei_en',  # 七詩ムメイ/ななしむめい
-            'ハコス・ベールズ' : 'hakosbaelz',    # ハコス・ベールズ
+            # ホロライブ　EN
+            '森カリオペ': 'moricalliope',     # 森カリオペ モリ・カリオペ
+            '小鳥遊キアラ': 'takanashikiara',     # 小鳥遊キアラ
+            '一伊那尓栖': 'ninomaeinanis',     # 一伊那尓栖 にのまえいなにす
+            'がうる・ぐら': 'gawrgura',     # がうる・くら
+            'ワトソン・アメリア': 'watsonameliaEN',   # ワトソン・アメリア
+            'IRyS': 'irys_en',  # IRyS アイリス
+            'つくもさな': 'tsukumosana',       # 九十九佐命/つくもさな
+            'セレス・ファウナ': 'ceresfauna',     # セレス・ファウナ
+            'オーロ・クロニー': 'ourokronii',    # オーロ・クロニー
+            'ななしむめい': 'nanashimumei_en',   # 七詩ムメイ/ななしむめい
+            'ハコス・ベールズ': 'hakosbaelz',     # ハコス・ベールズ
 
-            #ホロライブ ID
-            'アユンダ・リス' : 'ayunda_risu',    #Ayunda Risu / アユンダ・リス
-            'ムーナ・ホシノヴァ' : 'moonahoshinova',      #Moona Hoshinova / ムーナ・ホシノヴァ
-            'アイラニ・イオフィフティーン' : 'airaniiofifteen',      #Airani Iofifteen / アイラニ・イオフィフティーン
-            'クレイジー・オリー' : 'kureijiollie',     #Kureiji Ollie / クレイジー・オリー 
-            'アーニャ・メルフィッサ' : 'anyamelfissa',       #Anya Melfissa / アーニャ・メルフィッサ
-            'パヴォリア・レイネ' : 'pavoliareine',       #Pavolia Reine / パヴォリア・レイネ
-            'ベスティア・ゼータ' : 'vestiazeta',       #vestiazeta / ベスティア・ゼータ
-            'カエラ・コヴァルスキア' : 'kaelakovalskia',       #Kaela Kovalskia / カエラ・コヴァルスキア
-            'こぼ・かなえる' : 'kobokanaeru',       #kobokanaeru/こぼ・かなえる
+            # ホロライブ ID
+            'アユンダ・リス': 'ayunda_risu',     # Ayunda Risu / アユンダ・リス
+            'ムーナ・ホシノヴァ': 'moonahoshinova',       # Moona Hoshinova / ムーナ・ホシノヴァ
+            'アイラニ・イオフィフティーン': 'airaniiofifteen',       # Airani Iofifteen / アイラニ・イオフィフティーン
+            'クレイジー・オリー': 'kureijiollie',      # Kureiji Ollie / クレイジー・オリー 
+            'アーニャ・メルフィッサ': 'anyamelfissa',        # Anya Melfissa / アーニャ・メルフィッサ
+            'パヴォリア・レイネ': 'pavoliareine',        # Pavolia Reine / パヴォリア・レイネ
+            'ベスティア・ゼータ': 'vestiazeta',        # vestiazeta / ベスティア・ゼータ
+            'カエラ・コヴァルスキア': 'kaelakovalskia',        # Kaela Kovalskia / カエラ・コヴァルスキア
+            'こぼ・かなえる': 'kobokanaeru',        # kobokanaeru/こぼ・かなえる
         }
         return ch_list
 
@@ -90,7 +90,7 @@ class Hololive:
     def get_video_ids():
         return {
                 # ホロライブ
-                '戌神ころね' :'UChAnqc_AY5_I3Px5dig3X1Q',    #戌神ころね
+                '戌神ころね': 'UChAnqc_AY5_I3Px5dig3X1Q',    # 戌神ころね
                 'さくらみこ' : 'UC-hM6YJuNYVAmUWxeIr9FeA',     #さくらみこ
                 '白上フブキ' : 'UCdn5BQ06XqgXoAxIhbqw5Rg',   #白上フブキ
                 '湊あくあ' : 'UC1opHUrw8rvnsadT-iGp7Cg',     #湊あくあ

@@ -9,3 +9,4 @@
 
 ++参考++
 [Chaliceに入門してみた](https://dev.classmethod.jp/articles/chalice-handson/)
+[Challiceを使用し、Lambdaのコードを管理 ②](https://qiita.com/hirai-11/items/3f7c5d53f03b9b0d66ea)

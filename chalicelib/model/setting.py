@@ -9,8 +9,10 @@ RDS_DB = os.environ.get('RDS_DB')
 RDS_USER = os.environ.get('RDS_USER')
 RDS_PASS = os.environ.get('RDS_PASS')
 
+DIALECt = 'mysql'
+DRIVER = 'pymysql'
 # mysqlのDBの設定
-DATABASE = f'mysql://{RDS_USER}:{RDS_PASS}@{RDS_HOST}/{RDS_DB}?charset=utf8mb4'
+DATABASE = f'{DIALECt}+{DRIVER}://{RDS_USER}:{RDS_PASS}@{RDS_HOST}/{RDS_DB}?charset=utf8mb4'
 
 ENGINE = create_engine(
     DATABASE,

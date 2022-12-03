@@ -7,6 +7,22 @@ dotenv_path = join(dirname(__file__), '../env')
 load_dotenv(dotenv_path)
 
 
+'''
+Database
+'''
+RDS_HOST = os.environ.get('RDS_HOST')
+RDS_PORT = os.environ.get('RDS_PORT')
+RDS_USER = os.environ.get('RDS_USER')
+RDS_PASS = os.environ.get('RDS_PASS')
+REGION = os.environ.get('REGION')
+RDS_DB = os.environ.get('RDS_DB')
+
+'''
+S3
+'''
+BUCKET_NAME = os.environ.get('BUCKET_NAME')
+# FILE_NAME = os.environ.get('FILE_NAME')
+
 ''' 
 ディレクトリ リスト
 '''
@@ -169,7 +185,7 @@ NEWS_API =  os.environ.get('NEWS_API')
 
 
 '''
-地域番号
+トレンド検索で常に監視するワード
 '''
 WOEID_DICT = {'日本': 23424856,}
 
@@ -182,9 +198,10 @@ WOEID_DICT = {'日本': 23424856,}
 #             '岡山': 90036018, '新潟': 1117881, '高松': 1118285,
 #             '浜松': 1117155, '熊本': 1117605, '沖縄': 2345896
 #             }
-
-'''
-トレンド検索で常に監視するワード
-'''
 DEFAULT_CHECK_LIST = ['#hololive',]
+
 CHECK_LIST = ['#hololive']
+
+TREND_SAVE_FILE = os.environ.get('TREND_SAVE_FILE', 'trend_log_JP.pkl')
+
+NOTIFICATION_SEC = 3600  # 通知基準 60分

@@ -6,10 +6,6 @@ from chalicelib.config import app
 # API
 from chalicelib.service.twitter.TwitterWrapper import *
 
-# Utility
-from chalicelib.util import *
-from chalicelib.util.pkl_by_bot3 import *
-
 # Model
 from chalicelib.model.setting import session
 from chalicelib.model.setting import Base
@@ -17,6 +13,7 @@ from chalicelib.model.KeepWatch import *
 from chalicelib.model.NowLiveKeepWatch import *
 
 # Util
+from chalicelib.util.trend_watcher import TrendWatcher
 from chalicelib.util.pkl_by_bot3 import PKL_BY_BOT3
-from chalicelib.util.img_from_s3 import IMG_FROM_S3
-from chalicelib.util import config
+# from chalicelib.util.img_from_s3 import IMG_FROM_S3
+# from chalicelib.util import config
