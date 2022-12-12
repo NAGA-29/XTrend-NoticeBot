@@ -12,7 +12,7 @@ from chalicelib import app
 from chalicelib import TwitterWrapper
 from chalicelib import Hololive
 from chalicelib import TrendWatcher
-from chalicelib import PKL_BY_BOT3
+from chalicelib import PickleHandler
 
 import pymysql
 
@@ -39,11 +39,13 @@ def Main(event):
     tw = TwitterWrapper(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN,
                         ACCESS_TOKEN_SECRET)
     
-    pkl_by_bot3 = PKL_BY_BOT3(BUCKET_NAME)
-    trend_file = pkl_by_bot3.read_pkl(TREND_SAVE_FILE)
-    print(trend_file)
-    # trend = TrendWatcher(twitter_api=tw)
-    # trend.main(trend=trend_file)
+    # print(BUCKET_NAME)
+    # print(TREND_SAVE_FILE)
+    pkl = PickleHandler(BUCKET_NAME)
+    trend_file = pkl.read_pkl(TREND_SAVE_FILE)
+    # print(trend_file)
+    trend = TrendWatcher(twitter_api=tw)
+    trend.main(trend=trend_file)
     
     try:
         conn = pymysql.connect(host=ENDPOINT, user=USER, passwd=PASS,
