@@ -119,7 +119,7 @@ Twitter api
 3.My_HoloNoriArts_Project
 4.NoriUi_Project
 ''' 
-#twitterテスト
+# twitterテスト
 CONSUMER_KEY_TEST = os.environ.get('CONSUMER_KEY_TEST')
 CONSUMER_SECRET_TEST = os.environ.get('CONSUMER_SECRET_TEST')
 ACCESS_TOKEN_TEST = os.environ.get('ACCESS_TOKEN_TEST')

@@ -2,14 +2,14 @@ from retry import retry
 import tweepy
 from tweepy import TweepError
 from pprint import pprint
-import os
+
 
 class TwitterWrapper:
     '''
     Initial Setting
     '''
-    def __init__(self, CONSUMER_KEY, CONSUMER_SECRET,
-            ACCESS_TOKEN, ACCESS_TOKEN_SECRET, API=None):
+    def __init__(self, CONSUMER_KEY, CONSUMER_SECRET, 
+                 ACCESS_TOKEN, ACCESS_TOKEN_SECRET, API=None):
 
         # CONSUMER_KEY = os.environ.get('CONSUMER_KEY') if CONSUMER_KEY is None else CONSUMER_KEY
         # CONSUMER_SECRET = os.environ.get('CONSUMER_SECRET') if CONSUMER_SECRET is None else CONSUMER_SECRET
@@ -31,8 +31,7 @@ class TwitterWrapper:
     def imp_path(self, img_path):
         self.__img_path = img_path
 
-
-    def tweet(self, message:str):
+    def tweet(self, message: str):
         """ツイート
         Args:
             message (str): ツイートするメッセージ
@@ -40,11 +39,11 @@ class TwitterWrapper:
         Returns:
             bool: 成功(True) or 失敗(False)
         """
-        #ツイート内容
+        # ツイート内容
         TWEET_TEXT = message
         try :
             tweet_status = self.API.update_status(TWEET_TEXT)
-            if tweet_status == 200: #成功
+            if tweet_status == 200 : # 成功
                 # pprint(tweet_status)
                 return True
             else:
@@ -63,7 +62,7 @@ class TwitterWrapper:
         try :
             # ↓添付したい画像のファイル名
             status = self.API.update_with_media(filename=FILE_NAME, status=message)
-            if status == 200: #成功
+            if status == 200: # 成功
                 pprint("Succeed!")
                 return True
             else:
