@@ -9,7 +9,7 @@ class PickleHandler:
     def __init__(self, bucket_name):
         self.BUCKET_NAME = bucket_name
 
-    def __get_s3object(self, object_key_name):
+    def __get_object(self, object_key_name: str):
         s3 = boto3.resource('s3', region_name='ap-northeast-1')
         s3_object = s3.Object(self.BUCKET_NAME, object_key_name)
         return s3_object
@@ -73,12 +73,6 @@ class PickleHandler:
         pickle_byte_obj = pickle.dumps(noticed_space_id)
         s3_object = self.__get_object(object_key_name)
         s3_object.put(Body=pickle_byte_obj)
-
-
-
-
-
-
 
 # def read_noticed_space_id(NOTICED_SPACE_FILE):
 #     try:

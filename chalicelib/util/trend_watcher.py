@@ -30,17 +30,16 @@ TREND_SAVE_FILE = app.TREND_SAVE_FILE
 class TrendWatcher:
     def __init__(
                 self, twitter_api: TwitterWrapper,
-                lineAPI=None,
                 logger=None,
-                trend_save_file: str=None
+                trend_save_file: str = None
                 ) -> None:
-        self.TWITTER_API        = twitter_api
-        self.SCREEN_NAME        = TWITTER_SCREEN_NAME  # @usernameの自分のusername
-        self.WOEID_DICT         = WOEID_DICT
+        self.TWITTER_API = twitter_api.API
+        self.SCREEN_NAME = TWITTER_SCREEN_NAME  # @usernameの自分のusername
+        self.WOEID_DICT = WOEID_DICT
         self.DEFAULT_CHECK_LIST = DEFAULT_CHECK_LIST
-        self.CHECK_LIST         = CHECK_LIST
-        self.NOTIFICATION_SEC  = NOTIFICATION_SEC   # 通知基準 60分
-        self.TREND_SAVE_FILE    = TREND_SAVE_FILE
+        self.CHECK_LIST = CHECK_LIST
+        self.NOTIFICATION_SEC = NOTIFICATION_SEC   # 通知基準 60分
+        self.TREND_SAVE_FILE = TREND_SAVE_FILE
         
         if trend_save_file is not None:
             self.TREND_SAVE_FILE = trend_save_file
@@ -59,8 +58,7 @@ class TrendWatcher:
         tags = ''
         hashtags = []
         regex = r"([#＃][^#\s]*?)[\/\／\【\】\(\)\[\]　 \「\」]"
-        # now_live_keep_watch_db = session.query(NowLiveKeepWatch).filter(NowLiveKeepWatch.belongs == 'hololive').all()
-        # for data in now_live_keep_watch_db:
+
         for data in texts:
             tags = re.findall(regex, data.title)
             for tag in tags:
@@ -80,7 +78,9 @@ class TrendWatcher:
         Write_Trend_log = {}
         New_Trend = {}
         
-        now_live_keep_watch_db = session.query(NowLiveKeepWatch).filter(NowLiveKeepWatch.belongs == 'hololive').all()
+        now_live_keep_watch_db = session.query(NowLiveKeepWatch)\
+            .filter(NowLiveKeepWatch.belongs == 'hololive')\
+            .all()
         target_trend = self.hashtag_extract(now_live_keep_watch_db)
         
         if not target_trend and not default:
@@ -95,10 +95,11 @@ class TrendWatcher:
         #         Read_Trend_log = pickle.load(f)
         #         pprint(Read_Trend_log)
         # except EOFError as err:
-            # print(f'EOFError on load pickle file: {err}')
-            # self.logger.error(f'EOFError on load pickle file: {err}')
+        # print(f'EOFError on load pickle file: {err}')
+        # self.logger.error(f'EOFError on load pickle file: {err}')
             
         for place, woeid in self.WOEID_DICT.items():
+            pprint(self.TWITTER_API)
             trends = self.TWITTER_API.trends_place(woeid)
 
         rank = 0

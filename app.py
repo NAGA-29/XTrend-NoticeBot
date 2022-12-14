@@ -36,30 +36,32 @@ app = Chalice(app_name='HoloTrend-NoticeBot')
 
 @app.schedule(Rate(15, unit=Rate.MINUTES))
 def Main(event):
-    tw = TwitterWrapper(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN,
-                        ACCESS_TOKEN_SECRET)
-    
-    # print(BUCKET_NAME)
-    # print(TREND_SAVE_FILE)
     pkl = PickleHandler(BUCKET_NAME)
     trend_file = pkl.read_pkl(TREND_SAVE_FILE)
     # print(trend_file)
-    trend = TrendWatcher(twitter_api=tw)
+    # print(CONSUMER_KEY)
+
+    tw = TwitterWrapper(CONSUMER_KEY,
+                        CONSUMER_SECRET, 
+                        ACCESS_TOKEN,
+                        ACCESS_TOKEN_SECRET)
+    
+    trend = TrendWatcher(tw)
     trend.main(trend=trend_file)
     
-    try:
-        conn = pymysql.connect(host=ENDPOINT, user=USER, passwd=PASS,
-                                db=DBNAME, charset='utf8mb4', port=int(PORT),
-                                connect_timeout=5)
-    except pymysql.MySQLError as e:
-        print("ERROR: Unexpected error: Could not connect to MySQL instance.")
-        pprint(e)
-        sys.exit()
+    # try:
+    #     conn = pymysql.connect(host=ENDPOINT, user=USER, passwd=PASS,
+    #                             db=DBNAME, charset='utf8mb4', port=int(PORT),
+    #                             connect_timeout=5)
+    # except pymysql.MySQLError as e:
+    #     print("ERROR: Unexpected error: Could not connect to MySQL instance.")
+    #     pprint(e)
+    #     sys.exit()
 
-    print("SUCCESS: Connection to RDS MySQL instance succeeded")
-    with conn.cursor() as cursors:
-        cursors.execute('show databases')
-        pprint(cursors.fetchall())
-    conn.close()
-    conn = None
-    print('END!')
+    # print("SUCCESS: Connection to RDS MySQL instance succeeded")
+    # with conn.cursor() as cursors:
+    #     cursors.execute('show databases')
+    #     pprint(cursors.fetchall())
+    # conn.close()
+    # conn = None
+    # print('END!')
