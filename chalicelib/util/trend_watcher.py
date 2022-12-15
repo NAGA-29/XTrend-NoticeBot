@@ -1,19 +1,15 @@
 from datetime import datetime
 from datetime import datetime
 from dotenv import load_dotenv
-import os
 from os.path import join, dirname
-import pickle
 from pprint import pprint
 import re
-import sys
-import tweepy
 
 from chalicelib import TwitterWrapper
 
-'''
-original
-'''
+"""
+    original
+"""
 from chalicelib import app
 from chalicelib import session
 from chalicelib import KeepWatch
@@ -94,8 +90,6 @@ class TrendWatcher:
 
         try:
             pickle_handler = PickleHandler(BUCKET_NAME)
-            # with open(self.TREND_SAVE_FILE, 'rb') as f:
-            #     Read_Trend_log = pickle.load(f)
             Read_Trend_log = pickle_handler.read_pkl(TREND_SAVE_FILE)
             pprint(Read_Trend_log)
         except EOFError as err:
@@ -189,8 +183,6 @@ class TrendWatcher:
 
             # pklファイルに保存
             pprint('pklファイルに保存')
-            # with open(self.TREND_SAVE_FILE, 'wb') as f:
-            #     pickle.dump(Write_Trend_log, f)
             pickle_handler.write_pkl(Write_Trend_log, TREND_SAVE_FILE)
         except Exception as err:
             print(f'ERROR on save pickle file: {err}')
