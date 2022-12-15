@@ -14,6 +14,6 @@ from chalicelib.model.NowLiveKeepWatch import *
 
 # Util
 from chalicelib.util.trend_watcher import TrendWatcher
-from chalicelib.util.pkl_by_bot3 import PickleHandler
+from chalicelib.util.pickle_handler import PickleHandler
 # from chalicelib.util.img_from_s3 import IMG_FROM_S3
 # from chalicelib.util import config

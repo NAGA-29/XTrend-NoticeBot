@@ -18,12 +18,14 @@ from chalicelib import app
 from chalicelib import session
 from chalicelib import KeepWatch
 from chalicelib import NowLiveKeepWatch
+from .pickle_handler import PickleHandler
 
 TWITTER_SCREEN_NAME = app.TWITTER_SCREEN_NAME
 WOEID_DICT = app.WOEID_DICT
 DEFAULT_CHECK_LIST = app.DEFAULT_CHECK_LIST
 CHECK_LIST = app.CHECK_LIST
 NOTIFICATION_SEC = app.NOTIFICATION_SEC
+BUCKET_NAME = app.BUCKET_NAME
 TREND_SAVE_FILE = app.TREND_SAVE_FILE
 
 
@@ -90,13 +92,15 @@ class TrendWatcher:
             target_trend = target_trend + self.DEFAULT_CHECK_LIST
         print(target_trend)
 
-        # try:
-        #     with open(self.TREND_SAVE_FILE, 'rb') as f:
-        #         Read_Trend_log = pickle.load(f)
-        #         pprint(Read_Trend_log)
-        # except EOFError as err:
-        # print(f'EOFError on load pickle file: {err}')
-        # self.logger.error(f'EOFError on load pickle file: {err}')
+        try:
+            pickle_handler = PickleHandler(BUCKET_NAME)
+            # with open(self.TREND_SAVE_FILE, 'rb') as f:
+            #     Read_Trend_log = pickle.load(f)
+            Read_Trend_log = pickle_handler.read_pkl(TREND_SAVE_FILE)
+            pprint(Read_Trend_log)
+        except EOFError as err:
+            print(f'EOFError on load pickle file: {err}')
+            self.logger.error(f'EOFError on load pickle file: {err}')
             
         for place, woeid in self.WOEID_DICT.items():
             pprint(self.TWITTER_API)
@@ -185,8 +189,9 @@ class TrendWatcher:
 
             # pklファイルに保存
             pprint('pklファイルに保存')
-            with open(self.TREND_SAVE_FILE, 'wb') as f:
-                pickle.dump(Write_Trend_log, f)
+            # with open(self.TREND_SAVE_FILE, 'wb') as f:
+            #     pickle.dump(Write_Trend_log, f)
+            pickle_handler.write_pkl(Write_Trend_log, TREND_SAVE_FILE)
         except Exception as err:
             print(f'ERROR on save pickle file: {err}')
             # self.logger.error(f'ERROR on save pickle file: {err}')
