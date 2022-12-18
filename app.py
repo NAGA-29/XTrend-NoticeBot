@@ -45,10 +45,10 @@ def Main(event):
                         CONSUMER_SECRET, 
                         ACCESS_TOKEN,
                         ACCESS_TOKEN_SECRET)
-    
+
     trend = TrendWatcher(tw)
     trend.main(trend=trend_file)
-    
+
     # try:
     #     conn = pymysql.connect(host=ENDPOINT, user=USER, passwd=PASS,
     #                             db=DBNAME, charset='utf8mb4', port=int(PORT),
